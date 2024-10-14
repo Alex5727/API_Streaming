@@ -13,12 +13,14 @@ namespace API_Streaming
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        //API KEY que creamos
         string key = "AIzaSyCHavhUPYrQfjv-M4YVeBe0ts0xeMYUfJs";
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+        //Metodo que obtine un parametro para realizar una busqueda 
         private async Task GetYouTubeVideos(string buscar)
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
@@ -44,14 +46,16 @@ namespace API_Streaming
 
             }
 
+            //LLena el GridView con los resultados
             gridVideos.DataSource = listaVideos;
             gridVideos.DataBind();
 
         }
 
+        //Metodo que se ejecuta al precionar "Buscar" y usa el metodo de arriba para ejecutarlo con la busqueda como parametro
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            string buscar = txBuscar.Text;
+            string buscar = txtBuscar.Text;
             RegisterAsyncTask(new PageAsyncTask(() => GetYouTubeVideos(buscar)));
         }
     }
